@@ -1,0 +1,10 @@
+# vsanmgmtObjects.py v8        => Need for .py
+# vsanapiutils.py              => Need for .py
+
+Index:
+
+check_vcenter.py
+check_vcenter_v2.py
+check_vsan.py
+vsanapiutils.py
+vsanmgmtObjects.py
