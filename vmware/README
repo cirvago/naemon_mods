@@ -1,3 +1,5 @@
+For Python v3
+
 # vsanmgmtObjects.py v8        => Need for .py
 # vsanapiutils.py              => Need for .py
 
@@ -8,3 +10,5 @@ check_vcenter_v2.py
 check_vsan.py
 vsanapiutils.py
 vsanmgmtObjects.py
+
+
