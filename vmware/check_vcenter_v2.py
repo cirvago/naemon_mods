@@ -128,7 +128,7 @@ Process Virtual Machines Informations:
     vm.summary.quickStats.overallCpuUsage
     vm.summary.quickStats.swappedMemory
     vm.summary.config.memorySizeMB
-"""HealthStatus
+"""
 
 
 def process_vm_info(content):
