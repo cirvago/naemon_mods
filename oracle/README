@@ -36,10 +36,10 @@ Script deploy base: Nagios
 
 Example: 
 
-./check_oracle_health --connect DBDEV --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
+/usr/lib64/naemon/plugins/oracle/check_oracle_health --connect DBDEV --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
       OK - 15.00% of process resources used | process_usage=15.00%;85;90
 
-./check_oracle_health --connect DBDEV --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
+/usr/lib64/naemon/plugins/oracle/check_oracle_health --connect DBDEV --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
       OK - connection established to DBDEV.
 
 
