@@ -28,12 +28,18 @@ grant select on sys.v_$Temp_extent_pool to naemon;
 grant select on sys.v_$TEMP_SPACE_HEADER  to naemon;
 grant select on sys.v_$session to naemon;
 
-# File: tnsnames.ora
-/usr/lib/oracle/12.1/client64/network/admin
+# File: tnsnames.ora and sqlnet.ora
+/usr/lib/oracle/$version/$client/network/admin
 
 
 Script deploy base: Nagios
 
 Example: 
 
-./check_oracle_health_v2 --connect <TENAND> --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
+./check_oracle_health --connect DBDEV --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
+      OK - 15.00% of process resources used | process_usage=15.00%;85;90
+
+./check_oracle_health --connect DBDEV --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
+      OK - connection established to DBDEV.
+
+
