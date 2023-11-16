@@ -1,0 +1,30 @@
+Oracle heal Monitor
+
+Original plugin:   https://labs.consol.de/nagios/check_oracle_health/
+# User espesification database:
+
+create user naemon identified by Passw0rd123;
+grant create session to naemon;
+grant select any dictionary to naemon;
+grant select on V_$SYSSTAT to naemon;
+grant select on V_$INSTANCE to naemon;
+grant select on V_$LOG to naemon;
+grant select on SYS.DBA_DATA_FILES to naemon;
+grant select on SYS.DBA_FREE_SPACE to naemon;
+--
+-- if somebody still uses Oracle 8.1.7...
+grant select on sys.dba_tablespaces to naemon;
+grant select on dba_temp_files to naemon;
+grant select on sys.v_$Temp_extent_pool to naemon;
+grant select on sys.v_$TEMP_SPACE_HEADER  to naemon;
+grant select on sys.v_$session to naemon;
+
+# File: tnsnames.ora
+/usr/lib/oracle/12.1/client64/network/admin
+
+
+Script deploy base: Nagios
+
+Example: 
+
+./check_oracle_health_v2 --connect <TENAND> --mode tnsping --password Passw0rd1234 --username naemon --warning 85 --critical 90
