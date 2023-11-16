@@ -1,5 +1,7 @@
 #!/bin/bash
-
+# Power by: Nagios
+# Modify: c_V  (CirVago)
+# Date Update: 16 Nov 2023
 set -e
 set -u
 
