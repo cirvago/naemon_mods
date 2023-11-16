@@ -1,8 +1,8 @@
 Download "Oracle Insant client":
 https://www.oracle.com/mx/database/technologies/instant-client/linux-x86-64-downloads.html
-oracle-instantclient12.1-basic-*.rpm
-oracle-instantclient12.1-devel-*.rpm
-oracle-instantclient12.1-sqlplus-*.rpm
+oracle-instantclient##.#-basic-*.rpm
+oracle-instantclient##.#-devel-*.rpm
+oracle-instantclient##.#-sqlplus-*.rpm
 
 Note: Copy oracle-instanclient* same directory on: "oracleinstall.sh" dir.
 
