@@ -1,3 +1,12 @@
+Download "Oracle Insant client":
+https://www.oracle.com/mx/database/technologies/instant-client/linux-x86-64-downloads.html
+oracle-instantclient12.1-basic-*.rpm
+oracle-instantclient12.1-devel-*.rpm
+oracle-instantclient12.1-sqlplus-*.rpm
+
+Note: Copy oracle-instanclient* same directory on: "oracleinstall.sh" dir.
+
+
 Oracle heal Monitor
 
 Original plugin:   https://labs.consol.de/nagios/check_oracle_health/
