@@ -1,0 +1,26 @@
+FOR: Base RHEL 8 (CentOS, Rocky, OL, etc...)
+
+cpan install DBD::ODBC
+
+==================> Driver MS ODBC <=============================
+=================================================================
+#Download appropriate package for the OS version
+#Choose only ONE of the following, corresponding to your OS version
+
+#RHEL 8 and Oracle Linux 8
+curl https://packages.microsoft.com/config/rhel/8/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
+
+sudo yum remove unixODBC-utf16 unixODBC-utf16-devel #to avoid conflicts
+sudo ACCEPT_EULA=Y yum install -y msodbcsql17
+# optional: for bcp and sqlcmd
+sudo ACCEPT_EULA=Y yum install -y mssql-tools
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+source ~/.bashrc
+# optional: for unixODBC development headers
+sudo yum install -y unixODBC-devel
+
+
+================ SSL Mod:
+
+cp /usr/share/crypto-policies/DEFAULT/opensslcnf.txt /usr/share/crypto-policies/DEFAULT/opensslcnf.txt.ori
+wget  /e45d943665e806ff49d06cfbdd566a8e2d57d56d/apps/openssl.cnf -o /usr/share/crypto-policies/DEFAULT/opensslcnf.txt
