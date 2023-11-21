@@ -1,5 +1,7 @@
 # Power By: C_V
 # Date: Noviembre 2023
+# Mod: 21 Nov 2023
+#     - Perfdata
 #PowerShell
 ##### Add scripts
 # 1) 
@@ -27,16 +29,16 @@ $DRest = New-TimeSpan -Start $now -End $EndSupp
 
 if($Drest.Days -le $dcritical )
 {
-	Write-Host "CRITICAL!  $($Drest.Days.ToString()) to expire Support"
+	Write-Host "CRITICAL!  $($Drest.Days.ToString()) to expire Support. | veeam_endsupport=$($Drest.Days.ToString());$dwarning;$dcritical"
 	exit 2
 } 
 if($Drest.Days -le $dwarning )
 {
-	Write-Host "WARNING! $($Drest.Days.ToString()) to expire Support."
+	Write-Host "WARNING! $($Drest.Days.ToString()) to expire Support. | veeam_endsupport=$($Drest.Days.ToString());$dwarning;$dcritical"
 	exit 1
 } 
 else
 {
-	Write-Host "OK! $($Drest.Days.ToString()) to expire Support"
+	Write-Host "OK! $($Drest.Days.ToString()) to expire Support | veeam_endsupport=$($Drest.Days.ToString());$dwarning;$dcritical"
 	exit 0
 }
