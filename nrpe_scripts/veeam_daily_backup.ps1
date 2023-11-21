@@ -12,6 +12,7 @@
 # ARG1: Name Job whitout spaces
 # ARG2: Days
 # 3) Naemon / Nagios
+# Note: Jobs without spaces in the name.
 # check_nrpe  -t 30 -u -H 1$HOSTNAME$ -2 -c alias_daily_backup -a $ARG1$ $ARG2$
 # Command
 # 
@@ -61,6 +62,14 @@ if((Get-Date $now) -gt (Get-Date $last))
 } 
 else
 {
-	Write-Host "OK! Backup process of job $name completed successfully."
-	exit 0
+    if (($job.info.LatestStatus) -eq "Success")
+        {
+	        Write-Host "OK! Backup process of job $name completed successfully."
+	        exit 0
+        }
+    else
+        {
+            Write-Host "CRITICAL! Errors were encountered during the backup process of the following job: $name."
+	    exit 2
+        }
 }
