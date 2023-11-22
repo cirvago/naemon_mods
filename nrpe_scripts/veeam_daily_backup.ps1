@@ -33,19 +33,20 @@ if ($job -eq $null)
 }
 
 $status = $job.GetLastResult()
+$RunIng = $job.IsRunning
 
 
-if ($status -eq "Failed")
+if ($status -eq "Failed" -And $RunIng -ne "True" )
 {
-	Write-Host "CRITICAL! Errors were encountered during the backup process of the following job: $name."
+	Write-Host "CRITICAL! Errors were encountered during the job : $name.| veeam_daily=0;0;0;0"
 	exit 2
 }
 
 
-if ($status -ne "Success")
+if ($status -ne "Success" -And $RunIng -ne "True" )
 {
-	Write-Host "WARNING! Job $name didn't fully succeed."
-	exit 1
+	Write-Host "CRITICAL! Errors were encountered during the job: $name. | veeam_daily=0;0;0;0 "
+	exit 2
 }
 	
 # Veeam Backup & Replication job last run check
@@ -55,21 +56,26 @@ $now = $now.ToString("dd/MM/yyyy")
 $last = Get-VBRJobScheduleOptions($job) | findstr LatestRunLocal
 $last = $last -replace '.*LatestRunLocal * \: ', ''
 
-if((Get-Date $now) -gt (Get-Date $last))
+if((Get-Date $now) -gt (Get-Date $last) -or $RunIng -ne "True" )
 {
-	Write-Host "CRITICAL! Last run of job: $name more than $period days ago."
+	Write-Host "CRITICAL! Last run of job: $name more than $period days ago. | veeam_daily=0;0;0;0 "
 	exit 2
 } 
 else
 {
-    if (($job.info.LatestStatus) -eq "Success")
+    if (($job.info.LatestStatus) -eq "Success" )
         {
-	        Write-Host "OK! Backup process of job $name completed successfully."
+	        Write-Host "OK! Backup process of job $name completed successfully. | veeam_daily=1;0;0;1"
+	        exit 0
+        }
+    if ($RunIng -eq "True" )
+        {
+            Write-Host "OK! Backup process of job $name  is Running. | veeam_daily=1;0;0;1"
 	        exit 0
         }
     else
         {
-            Write-Host "CRITICAL! Errors were encountered during the backup process of the following job: $name."
+            Write-Host "CRITICAL! Errors were encountered during the backup process of the following job: $name. | veeam_daily=0;0;0;0"
 	    exit 2
         }
 }
