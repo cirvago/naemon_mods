@@ -4,6 +4,9 @@
 # Date: 10 Nov 2023
 # Change:  Disable check certificate.
 #          Change python v2 to v3
+#          Perfdata for: 
+#                ESXi CPU usage
+#                ESXi Memory usage
 # 
 # Link:  https://github.com/cirvago/naemon_mods
 
@@ -77,13 +80,13 @@ def process_host_info(content):
         CpuTotal = float(((host.summary.hardware.cpuMhz *
                            host.summary.hardware.numCpuCores)))
         PercentUsage = ((CpuUsage/CpuTotal)*100)
-        comment = "%s.overallCpuUsage: %.1f Mhz, cpu: %.1f Mhz, %.2f %%" % (opt.name.split(".")[0], CpuUsage, CpuTotal, PercentUsage)
+        comment = ' %s CPU Usage: %.2f %%  | overallCpuUsage=%.2f;%.1f;%.1f' %  (opt.name.split(".")[0], PercentUsage, PercentUsage, opt.warning , opt.critical)
         return nagios_return(PercentUsage, opt.warning, opt.critical, comment)
     elif opt.action in "MemoryUsage":
         MemoryUsage = ((float(host.summary.quickStats.overallMemoryUsage)/1024))
         MemorySize = ((float(host.summary.hardware.memorySize)/1024/1024/1024))
         PercentUsage = ((MemoryUsage/MemorySize)*100)
-        comment = "%s.overallMemoryUsage: %.2f GB, memorySize: %.2f GB, %.2f %%" % (opt.name.split(".")[0], MemoryUsage, MemorySize, PercentUsage)
+        comment = "%s Memory Usage: %.2f %% | overallMemoryUsage=%.2f;%.1f;%.1f" % (opt.name.split(".")[0], PercentUsage, PercentUsage, opt.warning , opt.critical)
         return nagios_return(PercentUsage, opt.warning, opt.critical, comment)
     else:
         return parser.print_help()
