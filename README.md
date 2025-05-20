@@ -1,5 +1,4 @@
-# naemon_mods
-# nagios_mods
+# naemon_mods &&  nagios_mods
 Modificaciones que se han realizado para la impelementación de NAEMON / NAGIOS en RHEL 8 / Rocky 8
 Se realizo el upgrade a Rocky 9 y siguen funcionando sin problemas
 
